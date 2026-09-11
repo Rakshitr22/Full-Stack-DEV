@@ -1,33 +1,13 @@
 import StatCard from "./StatCard";
 import TaskCard from "./TaskCard";
 import AddTask from  "./AddTask";
-import {useState} from "react";
 
 
-function Dashboard() {
-    const [tasks, setTasks] = useState([
-        {
-            id:1,
-            title:"Learn React",
-            description:"Understanding Components",
-            status: "Completed"
-        },
-        {
-            id:2,
-            title:"Learn JavaScript",
-            description:"Understanding Variables, Functions",
-            status: "Pending"
-        },
-        {  id:3,
-            title:"Learn MongoDB",
-            description:"Understanding Databases",
-            status: "Pending"
-        }
-        
-    ]);
+function Dashboard(props) {
+    
     function toggleTask(id){
         setTasks(
-            tasks.map((task) => {
+            props.tasks.map((task) => {
                 if(task.id===id){
                     return{...task,
                         status: task.status === "Completed" 
@@ -40,9 +20,15 @@ function Dashboard() {
         );
     }
     function addtask(newTask){
-        setTasks([...tasks,newTask]);
+    props.setTasks([...tasks,newTask]);
         console.log("newtask:",newTask);
 
+    }
+    function DeleteTask(id){
+         props.setTasks(
+            props.tasks.filter(task => task.id !== id)
+        );
+        return tasks;
     }
     return  (
       <main>
@@ -56,9 +42,10 @@ function Dashboard() {
             <h2>Recent Tasks</h2>
 
             <div className="tasks-container">
-                {tasks.map((task)=>(
-                    <TaskCard key={task.id} title={task.title} description={task.description} status={task.status} 
-                    onToggle={()=>toggleTask(task.id)} />
+                {props.tasks.map((task)=>(
+                    <TaskCard key={task.id} id ={task.title} title={task.title} description={task.description} status={task.status} 
+                    onToggle={()=>toggleTask(task.id)}
+                    onDelete={()=>DeleteTask(task.id)} />
                 ))};
             </div>
 

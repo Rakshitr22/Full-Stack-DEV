@@ -10,6 +10,7 @@ function AddTask(props){
             description: description,
             status: "Pending"
         };
+        console.log("object:", newTask);
         props.onaddTask(newTask);
     }
     return(
@@ -23,10 +24,10 @@ function AddTask(props){
     <br/><br/>
    <label>Add Description</label>
     <input type="text"
-value={description}
-onChange={(e)=>setDescription(e.target.value)}/>
-<button type="submit">Add Task</button>
-</form>
+    value={description}
+    onChange={(e)=>setDescription(e.target.value)}/>
+    <button type="submit">Add Task</button>
+    </form>
 </div>
     );
 }
