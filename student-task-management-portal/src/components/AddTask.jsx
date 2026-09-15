@@ -4,14 +4,14 @@ function AddTask(props){
     const[description,setDescription] =useState("");
     function handleSubmit(e){
         e.preventDefault();
-        const newTask={
+        const newTask ={
             id:Date.now(),
-            title: title,
+            title:title,
             description: description,
-            status: "Pending"
+            status:"pending"
         };
-        console.log("object:", newTask);
-        props.onaddTask(newTask);
+        console.log("object",newTask);
+        props.onAddTask(newTask)
     }
     return(
 <div>
@@ -24,10 +24,10 @@ function AddTask(props){
     <br/><br/>
    <label>Add Description</label>
     <input type="text"
-    value={description}
-    onChange={(e)=>setDescription(e.target.value)}/>
-    <button type="submit">Add Task</button>
-    </form>
+value={description}
+onChange={(e)=>setDescription(e.target.value)}/>
+<button type="submit">Add Task</button>
+</form>
 </div>
     );
 }
